@@ -1,7 +1,7 @@
 {
-  "name": "@black-duty/sing-box-schema",
+  "name": "@ricky9w/sing-box-schema",
   "version": "1.13.0",
-  "description": "A comprehensive Zod & JSON schema for sing-box configuration files, built with TypeScript.",
+  "description": "A comprehensive Zod & JSON schema for sing-box configuration files, built with TypeScript. Fork of @black-duty/sing-box-schema used by sing-manager.",
   "keywords": [
     "sing-box",
     "schema",
@@ -10,15 +10,15 @@
     "bun",
     "configuration"
   ],
-  "homepage": "https://github.com/BlackDuty/sing-box-schema#readme",
+  "homepage": "https://github.com/ricky9w/sing-box-schema#readme",
   "bugs": {
-    "url": "https://github.com/BlackDuty/sing-box-schema/issues"
+    "url": "https://github.com/ricky9w/sing-box-schema/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BlackDuty/sing-box-schema.git"
+    "url": "git+https://github.com/ricky9w/sing-box-schema.git"
   },
-  "author": "BlackDuty",
+  "author": "ricky9w",
   "license": "MIT",
   "files": [
     "./dist",
@@ -70,6 +70,5 @@
   "readme": "README.md",
   "dependencies": {
     "zod": "^4.0.17"
-  },
-  "packageManager": "bun@1.2.20"
+  }
 }
