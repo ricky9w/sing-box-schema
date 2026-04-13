@@ -214,47 +214,59 @@ export const TunInboundOptions = z
 
     // Deprecated fields
     gso: z.boolean().optional().meta({
-      description: "Enable generic segmentation offload.",
-      description_zh: "启用通用分段卸载。",
+      description:
+        "Enable generic segmentation offload. Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
+      description_zh:
+        "启用通用分段卸载。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。",
       deprecated: true,
     }),
     inet4_address: listableString.optional().meta({
-      description: "IPv4 prefix for the tun interface.",
-      description_zh: "tun 接口的 IPv4 前缀。",
+      description:
+        "IPv4 prefix for the tun interface. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `address` instead.",
+      description_zh:
+        "tun 接口的 IPv4 前缀。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `address`。",
       deprecated: true,
     }),
     inet6_address: listableString.optional().meta({
-      description: "IPv6 prefix for the tun interface.",
-      description_zh: "tun 接口的 IPv6 前缀。",
+      description:
+        "IPv6 prefix for the tun interface. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `address` instead.",
+      description_zh:
+        "tun 接口的 IPv6 前缀。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `address`。",
       deprecated: true,
     }),
     inet4_route_address: listableString.optional().meta({
       description:
-        "Use custom routes instead of default when `auto_route` is enabled.",
-      description_zh: "启用 `auto_route` 时使用自定义路由而不是默认路由。",
+        "Use custom routes instead of default when `auto_route` is enabled. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `route_address` instead.",
+      description_zh:
+        "启用 `auto_route` 时使用自定义路由而不是默认路由。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `route_address`。",
       deprecated: true,
     }),
     inet6_route_address: listableString.optional().meta({
       description:
-        "Use custom routes instead of default when `auto_route` is enabled.",
-      description_zh: "启用 `auto_route` 时使用自定义路由而不是默认路由。",
+        "Use custom routes instead of default when `auto_route` is enabled. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `route_address` instead.",
+      description_zh:
+        "启用 `auto_route` 时使用自定义路由而不是默认路由。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `route_address`。",
       deprecated: true,
     }),
     inet4_route_exclude_address: listableString.optional().meta({
-      description: "Exclude custom routes when `auto_route` is enabled.",
-      description_zh: "启用 `auto_route` 时排除自定义路由。",
+      description:
+        "Exclude custom routes when `auto_route` is enabled. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `route_exclude_address` instead.",
+      description_zh:
+        "启用 `auto_route` 时排除自定义路由。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `route_exclude_address`。",
       deprecated: true,
     }),
     inet6_route_exclude_address: listableString.optional().meta({
-      description: "Exclude custom routes when `auto_route` is enabled.",
-      description_zh: "启用 `auto_route` 时排除自定义路由。",
+      description:
+        "Exclude custom routes when `auto_route` is enabled. Deprecated in sing-box 1.10.0 and removed in 1.12.0. Use `route_exclude_address` instead.",
+      description_zh:
+        "启用 `auto_route` 时排除自定义路由。已在 sing-box 1.10.0 废弃并在 1.12.0 中移除。请改用 `route_exclude_address`。",
       deprecated: true,
     }),
     endpoint_independent_nat: z.boolean().optional().meta({
       description:
-        "Enable endpoint-independent NAT. This item is only available on the gvisor stack; other stacks are endpoint-independent NAT by default. Performance may degrade slightly, so it is not recommended to enable when it is not needed.",
+        "Enable endpoint-independent NAT. Deprecated and removed in sing-box 1.13.0.",
       description_zh:
-        "启用独立于端点的 NAT。此项仅在 gvisor 栈上可用，其他栈默认启用独立于端点的 NAT。性能可能略有下降，因此不建议在不需要时启用。",
+        "启用独立于端点的 NAT。已废弃并在 sing-box 1.13.0 中移除。",
       deprecated: true,
     }),
 

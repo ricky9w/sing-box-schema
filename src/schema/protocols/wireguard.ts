@@ -135,9 +135,9 @@ export const LegacyWireGuardOutboundOptions = z
     }),
     gso: z.boolean().optional().meta({
       description:
-        "Try to enable generic segmentation offload. Deprecated in sing-box 1.11.0; GSO will be automatically enabled when available. Only supported on Linux.",
+        "Try to enable generic segmentation offload. Deprecated in sing-box 1.11.0 and removed in 1.13.0. GSO is automatically enabled when available.",
       description_zh:
-        "尝试启用通用分段卸载。已在 sing-box 1.11.0 废弃；可用时将自动启用 GSO。仅在 Linux 上支持。",
+        "尝试启用通用分段卸载。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。可用时会自动启用 GSO。",
       deprecated: true,
     }),
     interface_name: z.string().optional().meta({
@@ -197,6 +197,11 @@ export const LegacyWireGuardOutboundOptions = z
     id: "LegacyWireGuardOutboundOptions",
     title: "Legacy WireGuard Outbound",
     title_zh: "旧版 WireGuard 出站",
+    description:
+      "WireGuard outbound is deprecated in sing-box 1.11.0 and removed in 1.13.0. Use the WireGuard endpoint instead.",
+    description_zh:
+      "WireGuard 出站已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。请使用 WireGuard 端点代替。",
+    deprecated: true,
   });
 export type LegacyWireGuardOutboundOptions = z.infer<
   typeof LegacyWireGuardOutboundOptions

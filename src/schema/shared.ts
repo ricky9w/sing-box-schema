@@ -45,37 +45,37 @@ export type HttpHeader = z.infer<typeof HttpHeader>;
 export const InboundOptions = z.object({
   sniff: z.boolean().optional().meta({
     description:
-      "Enable sniffing. Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
+      "Enable sniffing. Deprecated in sing-box 1.11.0 and removed in 1.13.0. Use route rule action `sniff` instead.",
     description_zh:
-      "启用协议探测。已在 sing-box 1.11.0 弃用，并将在 1.13.0 移除。",
+      "启用协议探测。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。请改用路由规则动作 `sniff`。",
     deprecated: true,
   }),
   sniff_override_destination: z.boolean().optional().meta({
     description:
       "Override the connection destination address with the sniffed domain. Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
     description_zh:
-      "用探测出的域名覆盖连接目标地址。已在 sing-box 1.11.0 弃用，并将在 1.13.0 移除。",
+      "用探测出的域名覆盖连接目标地址。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。",
     deprecated: true,
   }),
   sniff_timeout: z.string().optional().meta({
     description:
       "Timeout for sniffing (default `300ms`). Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
     description_zh:
-      "探测超时时间（默认 `300ms`）。已在 sing-box 1.11.0 弃用，并将在 1.13.0 移除。",
+      "探测超时时间（默认 `300ms`）。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。",
     deprecated: true,
   }),
   domain_strategy: DomainStrategy.optional().meta({
     description:
       "If set, the requested domain name will be resolved to IP before routing. Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
     description_zh:
-      "如果设置，请求的域名将在路由之前解析为 IP。已在 sing-box 1.11.0 弃用，并将在 1.13.0 移除。",
+      "如果设置，请求的域名将在路由之前解析为 IP。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。",
     deprecated: true,
   }),
   udp_disable_domain_unmapping: z.boolean().optional().meta({
     description:
       "If enabled, for UDP proxy requests addressed to a domain, the original packet address will be sent in the response instead of the mapped domain. Deprecated in sing-box 1.11.0 and removed in 1.13.0.",
     description_zh:
-      "如果启用，对于地址为域的 UDP 代理请求，将在响应中发送原始包地址而不是映射的域。已在 sing-box 1.11.0 弃用，并将在 1.13.0 移除。",
+      "如果启用，对于地址为域的 UDP 代理请求，将在响应中发送原始包地址而不是映射的域。已在 sing-box 1.11.0 废弃并在 1.13.0 中移除。",
     deprecated: true,
   }),
   detour: z.string().optional().meta({
@@ -146,13 +146,16 @@ export const ListenOptions = z
     }),
 
     proxy_protocol: z.boolean().optional().meta({
-      description: "Accept proxy protocol.",
-      description_zh: "接受代理协议。",
+      description:
+        "Accept proxy protocol. Deprecated in sing-box 1.6.0 and removed.",
+      description_zh: "接受代理协议。已在 sing-box 1.6.0 废弃并移除。",
       deprecated: true,
     }),
     proxy_protocol_accept_no_header: z.boolean().optional().meta({
-      description: "Accept connections without proxy protocol header.",
-      description_zh: "接受没有代理协议头的连接。",
+      description:
+        "Accept connections without proxy protocol header. Deprecated in sing-box 1.6.0 and removed.",
+      description_zh:
+        "接受没有代理协议头的连接。已在 sing-box 1.6.0 废弃并移除。",
       deprecated: true,
     }),
 
@@ -538,13 +541,17 @@ const InboundECHOptions = z
       description_zh: "ECH PEM 密钥路径。",
     }),
     pq_signature_schemes_enabled: z.boolean().optional().meta({
-      description: "Enable post-quantum signature schemes.",
-      description_zh: "启用后量子签名方案。",
+      description:
+        "Enable post-quantum signature schemes. Deprecated in sing-box 1.12.0 and removed in 1.13.0.",
+      description_zh:
+        "启用后量子签名方案。已在 sing-box 1.12.0 废弃并在 1.13.0 中移除。",
       deprecated: true,
     }),
     dynamic_record_sizing_disabled: z.boolean().optional().meta({
-      description: "Disable dynamic record sizing.",
-      description_zh: "禁用动态记录大小。",
+      description:
+        "Disable dynamic record sizing. Deprecated in sing-box 1.12.0 and removed in 1.13.0.",
+      description_zh:
+        "禁用动态记录大小。已在 sing-box 1.12.0 废弃并在 1.13.0 中移除。",
       deprecated: true,
     }),
   })
@@ -723,13 +730,17 @@ const OutboundECHOptions = z
       description_zh: "覆盖用于 ECH HTTPS 记录查询的域名。",
     }),
     pq_signature_schemes_enabled: z.boolean().optional().meta({
-      description: "Enable post-quantum signature schemes.",
-      description_zh: "启用后量子签名方案。",
+      description:
+        "Enable post-quantum signature schemes. Deprecated in sing-box 1.12.0 and removed in 1.13.0.",
+      description_zh:
+        "启用后量子签名方案。已在 sing-box 1.12.0 废弃并在 1.13.0 中移除。",
       deprecated: true,
     }),
     dynamic_record_sizing_disabled: z.boolean().optional().meta({
-      description: "Disable dynamic record sizing.",
-      description_zh: "禁用动态记录大小。",
+      description:
+        "Disable dynamic record sizing. Deprecated in sing-box 1.12.0 and removed in 1.13.0.",
+      description_zh:
+        "禁用动态记录大小。已在 sing-box 1.12.0 废弃并在 1.13.0 中移除。",
       deprecated: true,
     }),
   })

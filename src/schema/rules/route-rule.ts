@@ -222,6 +222,27 @@ const RuleActionHijackDNS = z
     title_zh: "规则动作劫持 DNS",
   });
 
+const RuleActionBypass = z
+  .object({
+    action: z.literal("bypass").meta({
+      description:
+        "Action type. Since sing-box 1.13.0. Only supported on Linux with auto_redirect enabled.",
+      description_zh:
+        "动作类型。自 sing-box 1.13.0 起可用。仅支持在启用了 auto_redirect 的 Linux 上使用。",
+    }),
+    outbound: z.string().optional().meta({
+      description:
+        "Tag of target outbound. Traffic will bypass sing-box routing and connect directly.",
+      description_zh: "目标出站的标签。流量将绕过 sing-box 路由直接连接。",
+    }),
+    ...RuleActionRouteOptions.shape,
+  })
+  .meta({
+    id: "RuleActionBypass",
+    title: "Rule Action Bypass",
+    title_zh: "规则动作绕过",
+  });
+
 const RuleActionRouteOptionsWithAction = z
   .object({
     action: z.literal("route-options").meta({
@@ -251,13 +272,13 @@ const BaseRouteRule = z.object({
       description: "4 or 6. Not limited if empty.",
       description_zh: "4 或 6。默认不限制。",
     }),
-  network: listable(z.enum(["tcp", "udp"]))
+  network: listable(z.enum(["tcp", "udp", "icmp"]))
     .optional()
     .meta({
       description:
-        "Since sing-box 1.13.0, you can match ICMP echo (ping) requests via the new `icmp` network. Such traffic originates from `TUN`, `WireGuard`, and `Tailscale` inbounds and can be routed to `Direct`, `WireGuard`, and `Tailscale` outbounds. Match network type. `tcp`, `udp` or `icmp`.",
+        "Match network type. `tcp`, `udp` or `icmp`. Since sing-box 1.13.0, you can match ICMP echo (ping) requests via the `icmp` network. Such traffic originates from `TUN`, `WireGuard`, and `Tailscale` inbounds and can be routed to `Direct`, `WireGuard`, and `Tailscale` outbounds.",
       description_zh:
-        "自 sing-box 1.13.0 起，您可以通过新的 `icmp` 网络匹配 ICMP 回显（ping）请求。此类流量源自 `TUN`、`WireGuard` 和 `Tailscale` 入站，并可路由至 `Direct`、`WireGuard` 和 `Tailscale` 出站。匹配网络类型。`tcp`、`udp` 或 `icmp`。",
+        "匹配网络类型。`tcp`、`udp` 或 `icmp`。自 sing-box 1.13.0 起，您可以通过 `icmp` 网络匹配 ICMP 回显（ping）请求。此类流量源自 `TUN`、`WireGuard` 和 `Tailscale` 入站，并可路由至 `Direct`、`WireGuard` 和 `Tailscale` 出站。",
     }),
   auth_user: listableString.optional().meta({
     description: "Username, see each inbound for details.",
@@ -450,9 +471,9 @@ const BaseRouteRule = z.object({
   }),
   rule_set_ipcidr_match_source: z.boolean().optional().meta({
     description:
-      "Deprecated in sing-box 1.10.0. `rule_set_ipcidr_match_source` is renamed to `rule_set_ip_cidr_match_source` and will be remove in sing-box 1.11.0. Make `ip_cidr` in rule-sets match the source IP.",
+      "Deprecated in sing-box 1.10.0 and removed in 1.11.0. Renamed to `rule_set_ip_cidr_match_source`.",
     description_zh:
-      "已在 sing-box 1.10.0 废弃。`rule_set_ipcidr_match_source` 已重命名为 `rule_set_ip_cidr_match_source` 且将在 sing-box 1.11.0 中被移除。使规则集中的 `ip_cidr` 规则匹配源 IP。",
+      "已在 sing-box 1.10.0 废弃并在 1.11.0 中移除。已重命名为 `rule_set_ip_cidr_match_source`。",
     deprecated: true,
   }),
   invert: z.boolean().optional().meta({
@@ -464,6 +485,7 @@ const BaseRouteRule = z.object({
 const DefaultRouteRule = z.union([
   BaseRouteRule.extend(RuleActionRouteByDefault.shape),
   BaseRouteRule.extend(RuleActionRoute.shape),
+  BaseRouteRule.extend(RuleActionBypass.shape),
   BaseRouteRule.extend(RuleActionReject.shape),
   BaseRouteRule.extend(RuleActionHijackDNS.shape),
   BaseRouteRule.extend(RuleActionRouteOptionsWithAction.shape),

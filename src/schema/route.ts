@@ -29,9 +29,9 @@ export const GeoIPOptions = z
     title: "GeoIP",
     title_zh: "GeoIP 资源",
     description:
-      "GeoIP is deprecated and will be removed in sing-box 1.12.0, check Migration.",
+      "GeoIP is deprecated in sing-box 1.8.0 and removed in 1.12.0. Use rule-set instead.",
     description_zh:
-      "GeoIP 已废弃且将在 sing-box 1.12.0 中被移除，参阅 迁移指南。",
+      "GeoIP 已在 sing-box 1.8.0 废弃并在 1.12.0 中移除。请改用规则集。",
     deprecated: true,
   });
 
@@ -55,9 +55,9 @@ export const GeositeOptions = z
     title: "Geosite",
     title_zh: "GeoSite 资源",
     description:
-      "Geosite is deprecated and will be removed in sing-box 1.12.0, check Migration.",
+      "Geosite is deprecated in sing-box 1.8.0 and removed in 1.12.0. Use rule-set instead.",
     description_zh:
-      "Geosite 已废弃且将在 sing-box 1.12.0 中被移除，参阅 迁移指南。",
+      "Geosite 已在 sing-box 1.8.0 废弃并在 1.12.0 中移除。请改用规则集。",
     deprecated: true,
   });
 

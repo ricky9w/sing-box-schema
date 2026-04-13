@@ -20,6 +20,10 @@ export const ShadowsocksROutboundOptions = z
     id: "ShadowsocksROutboundOptions",
     title: "ShadowsocksR Outbound",
     title_zh: "ShadowsocksR 出站",
+    description:
+      "ShadowsocksR is deprecated and removed in sing-box 1.6.0. The protocol is obsolete.",
+    description_zh:
+      "ShadowsocksR 已废弃并在 sing-box 1.6.0 中移除。该协议已过时。",
     deprecated: true,
   });
 

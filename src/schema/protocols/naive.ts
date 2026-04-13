@@ -26,6 +26,15 @@ export const NaiveInboundOptions = z
       description: "Naive users. Required.",
       description_zh: "Naive 用户。必填。",
     }),
+    quic_congestion_control: z
+      .enum(["bbr", "bbr_standard", "bbr2", "bbr2_variant", "cubic", "reno"])
+      .optional()
+      .meta({
+        description:
+          "QUIC congestion control algorithm. Available values: `bbr` (default), `bbr_standard`, `bbr2`, `bbr2_variant`, `cubic`, `reno`. Since sing-box 1.13.0.",
+        description_zh:
+          "QUIC 拥塞控制算法。可选值：`bbr`（默认）、`bbr_standard`、`bbr2`、`bbr2_variant`、`cubic`、`reno`。自 sing-box 1.13.0 起可用。",
+      }),
     /**
      * TLS configuration.
      */

@@ -345,9 +345,10 @@ const BaseDNSRule = z.object({
   }),
   rule_set_ip_cidr_accept_empty: z.boolean().optional().meta({
     description:
-      "Make `ip_cidr` rules in rule-sets accept empty query response. Only takes effect for address requests (A/AAAA/HTTPS).",
+      "Make `ip_cidr` rules in rule-sets accept empty query response. Only takes effect for address requests (A/AAAA/HTTPS). Deprecated in sing-box 1.14.0; use response matching instead.",
     description_zh:
-      "使规则集中的 `ip_cidr` 规则接受空查询响应。仅对地址请求（A/AAAA/HTTPS）生效。",
+      "使规则集中的 `ip_cidr` 规则接受空查询响应。仅对地址请求（A/AAAA/HTTPS）生效。已在 sing-box 1.14.0 废弃；请改用响应匹配。",
+    deprecated: true,
   }),
   invert: z.boolean().optional().meta({
     description: "Invert match result.",

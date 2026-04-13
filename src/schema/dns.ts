@@ -445,22 +445,23 @@ export const ResolvedDNSServerOptions = z
     title_zh: "Resolved DNS 服务器",
   });
 
+const TypedDNSServer = z.discriminatedUnion("type", [
+  LocalDNSServerOptions,
+  HostsDNSServerOptions,
+  TCPDNSServerOptions,
+  UDPDNSServerOptions,
+  TLSDNSServerOptions,
+  QUICDNSServerOptions,
+  HTTPSDNSServerOptions,
+  HTTP3DNSServerOptions,
+  DHCPDNSServerOptions,
+  FakeIPDNSServerOptions,
+  TailscaleDNSServerOptions,
+  ResolvedDNSServerOptions,
+]);
+
 export const DNSServer = z
-  .discriminatedUnion("type", [
-    LocalDNSServerOptions,
-    HostsDNSServerOptions,
-    TCPDNSServerOptions,
-    UDPDNSServerOptions,
-    TLSDNSServerOptions,
-    QUICDNSServerOptions,
-    HTTPSDNSServerOptions,
-    HTTP3DNSServerOptions,
-    DHCPDNSServerOptions,
-    FakeIPDNSServerOptions,
-    TailscaleDNSServerOptions,
-    ResolvedDNSServerOptions,
-    LegacyDNSServerOptions,
-  ])
+  .union([TypedDNSServer, LegacyDNSServerOptions])
   .meta({
     id: "DNSServer",
     title: "DNS Server",
