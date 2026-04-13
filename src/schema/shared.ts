@@ -92,7 +92,7 @@ export const ListenOptions = z
       description: "Listen address.",
       description_zh: "监听地址。",
     }),
-    listen_port: z.number().int().optional().meta({
+    listen_port: z.number().int().min(0).max(65535).optional().meta({
       description: "Listen port.",
       description_zh: "监听端口。",
     }),
@@ -374,7 +374,7 @@ export const ServerOptions = z
       description: "The server address.",
       description_zh: "服务器地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description: "The server port.",
       description_zh: "服务器端口。",
     }),
@@ -486,11 +486,11 @@ const InboundACMEOptions = z
       description: "Disable all TLS-ALPN challenges.",
       description_zh: "禁用所有 TLS-ALPN 质询。",
     }),
-    alternative_http_port: z.number().int().optional().meta({
+    alternative_http_port: z.number().int().min(0).max(65535).optional().meta({
       description: "The alternate port to use for the ACME HTTP challenge.",
       description_zh: "用于 ACME HTTP 质询的备用端口。",
     }),
-    alternative_tls_port: z.number().int().optional().meta({
+    alternative_tls_port: z.number().int().min(0).max(65535).optional().meta({
       description: "The alternate port to use for the ACME TLS-ALPN challenge.",
       description_zh: "用于 ACME TLS-ALPN 质询的备用端口。",
     }),

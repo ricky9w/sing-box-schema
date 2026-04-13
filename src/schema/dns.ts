@@ -190,7 +190,7 @@ export const TCPDNSServerOptions = z
       description_zh:
         "TCP DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the TCP DNS server. `53` will be used by default.",
       description_zh: "TCP DNS 服务器的端口。默认使用 `53`。",
@@ -214,7 +214,7 @@ export const UDPDNSServerOptions = z
       description_zh:
         "UDP DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the UDP DNS server. `53` will be used by default.",
       description_zh: "UDP DNS 服务器的端口。默认使用 `53`。",
@@ -238,7 +238,7 @@ export const TLSDNSServerOptions = z
       description_zh:
         "TLS DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the TLS DNS server. `853` will be used by default.",
       description_zh: "TLS DNS 服务器的端口。默认使用 `853`。",
@@ -267,7 +267,7 @@ export const QUICDNSServerOptions = z
       description_zh:
         "QUIC DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the QUIC DNS server. `853` will be used by default.",
       description_zh: "QUIC DNS 服务器的端口。默认使用 `853`。",
@@ -296,7 +296,7 @@ export const HTTPSDNSServerOptions = z
       description_zh:
         "HTTPS DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the HTTPS DNS server. `443` will be used by default.",
       description_zh: "HTTPS DNS 服务器的端口。默认使用 `443`。",
@@ -338,7 +338,7 @@ export const HTTP3DNSServerOptions = z
       description_zh:
         "HTTP3 DNS 服务器的地址。如果使用域名，还必须设置 `domain_resolver` 来解析 IP 地址。",
     }),
-    server_port: z.number().int().optional().meta({
+    server_port: z.number().int().min(0).max(65535).optional().meta({
       description:
         "The port of the HTTP3 DNS server. `443` will be used by default.",
       description_zh: "HTTP3 DNS 服务器的端口。默认使用 `443`。",
