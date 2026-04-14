@@ -17,7 +17,7 @@ export const AnyTLSUser = z.object({
 export const AnyTLSInboundOptions = z
   .object({
     type: z.literal("anytls"),
-    tag: z.string(),
+    tag: z.string().optional(),
     users: z.array(AnyTLSUser).optional().meta({
       description: "AnyTLS users. Required.",
       description_zh: "AnyTLS 用户。必填。",
@@ -47,7 +47,7 @@ export type AnyTLSInboundOptions = z.infer<typeof AnyTLSInboundOptions>;
 export const AnyTLSOutboundOptions = z
   .object({
     type: z.literal("anytls"),
-    tag: z.string(),
+    tag: z.string().optional(),
     password: z.string().meta({
       description: "The AnyTLS password. Required.",
       description_zh: "AnyTLS 密码。必填。",
