@@ -18,15 +18,9 @@ This project's tags correspond to the `sing-box` project's versions. Switch to d
 
 ## Branch Description
 
-This project has the following branches, each adapted to different versions of `sing-box`:
-
-- **main**: The main branch with the latest stable commits, currently v1.13.x.
-- **stable**: Adapts to the stable version of `sing-box` (currently v1.13.x).
-- **next**: Adapts to the next preview version of `sing-box` (no new preview version currently; mirrors stable v1.13.x).
-- **legacy/v1.12**: Adapts to the final v1.12.x release of `sing-box`.
-- **legacy/v1.11**: Adapts to older versions of `sing-box` (v1.11.x, e.g., older versions in the Play Store / App Store that cannot be updated).
-
-Developers can switch between different branches to adapt to their progress. For regular users, it is recommended to use tags to locate specific versions.
+- **main**: Always tracks the current stable sing-box version (currently v1.13.x). All stable fixes land here.
+- **dev/x.y** (e.g., `dev/1.14`): Development branch for the next sing-box version. Created when alpha begins, merged into `main` when stable, then deleted.
+- **legacy/v1.12**, **legacy/v1.11**: Archived snapshots of previous stable versions (read-only).
 
 ## Usage
 
