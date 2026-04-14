@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CertificateOptions } from "./certificate";
+import { CertificateProvider } from "./certificate-provider";
 import { DNSOptions } from "./dns";
 import { Endpoint } from "./endpoint";
 import { ExperimentalOptions } from "./experimental";
@@ -17,6 +18,10 @@ export const Configuration = z
     dns: DNSOptions.optional(),
     ntp: NTPOptions.optional(),
     certificate: CertificateOptions.optional(),
+    certificate_providers: z.array(CertificateProvider).optional().meta({
+      description: "List of certificate providers. Since sing-box 1.14.0.",
+      description_zh: "证书提供者列表。自 sing-box 1.14.0 起可用。",
+    }),
     endpoints: z.array(Endpoint).optional(),
     inbounds: z.array(Inbound).optional(),
     outbounds: z.array(Outbound).optional(),
@@ -26,13 +31,13 @@ export const Configuration = z
   })
   .meta({
     id: "Configuration",
-    title: "Sing-box v1.13.0 Configuration",
-    title_zh: "Sing-box v1.13.0 配置文件",
+    title: "Sing-box v1.14.0 Configuration",
+    title_zh: "Sing-box v1.14.0 配置文件",
     description:
-      "Sing-box v1.13.0 configuration file schema. Sing-box uses JSON for configuration files with log, dns, ntp, certificate, endpoints, inbounds, outbounds, route, services, and experimental sections.",
+      "Sing-box v1.14.0 configuration file schema. Sing-box uses JSON for configuration files with log, dns, ntp, certificate, certificate_providers, endpoints, inbounds, outbounds, route, services, and experimental sections.",
     description_zh:
-      "Sing-box v1.13.0 配置文件定义。sing-box 使用 JSON 作为配置文件格式，包含 log、dns、ntp、certificate、endpoints、inbounds、outbounds、route、services 与 experimental 字段。",
-    version: "1.13.0",
+      "Sing-box v1.14.0 配置文件定义。sing-box 使用 JSON 作为配置文件格式，包含 log、dns、ntp、certificate、certificate_providers、endpoints、inbounds、outbounds、route、services 与 experimental 字段。",
+    version: "1.14.0",
   });
 
 export type Configuration = z.infer<typeof Configuration>;

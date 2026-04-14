@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { AnyTLSInboundOptions } from "./protocols/anytls";
+import { CloudflaredInboundOptions } from "./protocols/cloudflared";
 import { DirectInboundOptions } from "./protocols/direct";
 import { HTTPInboundOptions } from "./protocols/http";
 import { HysteriaInboundOptions } from "./protocols/hysteria";
@@ -36,7 +37,7 @@ export const Inbound = z
     TunInboundOptions,
     RedirectInboundOptions,
     TProxyInboundOptions,
-    // Add other inbound types here
+    CloudflaredInboundOptions,
   ])
   .meta({
     id: "Inbound",

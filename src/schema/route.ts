@@ -81,6 +81,18 @@ export const RouteOptions = z
       description: "Find process info for each connection.",
       description_zh: "为每个连接查找进程信息。",
     }),
+    find_neighbor: z.boolean().optional().meta({
+      description:
+        "Enable neighbor resolution for logging. Only supported on Linux and macOS. Since sing-box 1.14.0.",
+      description_zh:
+        "启用邻居解析以用于日志记录。仅支持 Linux 和 macOS。自 sing-box 1.14.0 起可用。",
+    }),
+    dhcp_lease_files: z.array(z.string()).optional().meta({
+      description:
+        "Custom DHCP lease file paths for hostname and MAC address resolution. Since sing-box 1.14.0.",
+      description_zh:
+        "自定义 DHCP 租约文件路径，用于主机名和 MAC 地址解析。自 sing-box 1.14.0 起可用。",
+    }),
     auto_detect_interface: z.boolean().optional().meta({
       description:
         "Only supported on Linux, Windows and macOS. Bind outbound connections to the default NIC by default to prevent routing loops under tun. Takes no effect if `outbound.bind_interface` is set.",

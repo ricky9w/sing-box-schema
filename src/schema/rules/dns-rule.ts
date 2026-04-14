@@ -21,13 +21,19 @@ const DNSRouteAction = z
     }),
     strategy: DomainStrategy.optional().meta({
       description:
-        "Set domain strategy for this query. One of `prefer_ipv4` `prefer_ipv6` `ipv4_only` `ipv6_only`.",
+        "Set domain strategy for this query. Deprecated in sing-box 1.14.0 and will be removed in 1.16.0.",
       description_zh:
-        "为此查询设置域名策略。可选项：`prefer_ipv4` `prefer_ipv6` `ipv4_only` `ipv6_only`。",
+        "为此查询设置域名策略。已在 sing-box 1.14.0 废弃，将在 1.16.0 中移除。",
+      deprecated: true,
     }),
     disable_cache: z.boolean().optional().meta({
       description: "Disable cache and save cache in this query.",
       description_zh: "在此查询中禁用缓存。",
+    }),
+    disable_optimistic_cache: z.boolean().optional().meta({
+      description:
+        "Disable optimistic DNS caching for this query. Since sing-box 1.14.0.",
+      description_zh: "禁用此查询的乐观 DNS 缓存。自 sing-box 1.14.0 起可用。",
     }),
     rewrite_ttl: z.number().int().optional().meta({
       description: "Rewrite TTL in DNS responses.",
@@ -77,15 +83,14 @@ const DNSRouteOptionsAction = z
       description: "Action type.",
       description_zh: "动作类型。",
     }),
-    strategy: DomainStrategy.optional().meta({
-      description:
-        "Set domain strategy for this query. One of `prefer_ipv4` `prefer_ipv6` `ipv4_only` `ipv6_only`.",
-      description_zh:
-        "为此查询设置域名策略。可选项：`prefer_ipv4` `prefer_ipv6` `ipv4_only` `ipv6_only`。",
-    }),
     disable_cache: z.boolean().optional().meta({
       description: "Disable cache and save cache in this query.",
       description_zh: "在此查询中禁用缓存。",
+    }),
+    disable_optimistic_cache: z.boolean().optional().meta({
+      description:
+        "Disable optimistic DNS caching for this query. Since sing-box 1.14.0.",
+      description_zh: "禁用此查询的乐观 DNS 缓存。自 sing-box 1.14.0 起可用。",
     }),
     rewrite_ttl: z.number().int().optional().meta({
       description: "Rewrite TTL in DNS responses.",
@@ -139,6 +144,58 @@ const DNSRouteActionPredefined = z
     id: "DNSRouteActionPredefined",
     title: "DNS Route Action Predefined",
     title_zh: "DNS 路由动作预定义",
+  });
+
+const DNSEvaluateAction = z
+  .object({
+    action: z.literal("evaluate").meta({
+      description:
+        "Queries DNS server and saves response for subsequent `match_response` rules. Does not terminate rule evaluation. Since sing-box 1.14.0.",
+      description_zh:
+        "查询 DNS 服务器并保存响应以供后续 `match_response` 规则使用。不会终止规则评估。自 sing-box 1.14.0 起可用。",
+    }),
+    server: z.string().meta({
+      description: "Tag of target server. Required.",
+      description_zh: "目标服务器的标签。必填。",
+    }),
+    disable_cache: z.boolean().optional().meta({
+      description: "Disable cache and save cache in this query.",
+      description_zh: "在此查询中禁用缓存。",
+    }),
+    disable_optimistic_cache: z.boolean().optional().meta({
+      description: "Disable optimistic DNS caching for this query.",
+      description_zh: "禁用此查询的乐观 DNS 缓存。",
+    }),
+    rewrite_ttl: z.number().int().optional().meta({
+      description: "Rewrite TTL in DNS responses.",
+      description_zh: "重写 DNS 回应中的 TTL。",
+    }),
+    client_subnet: z.string().optional().meta({
+      description:
+        "Append a `edns0-subnet` OPT extra record with the specified IP prefix to every query by default.",
+      description_zh:
+        "默认情况下，将带有指定 IP 前缀的 `edns0-subnet` OPT 附加记录附加到每个查询。",
+    }),
+  })
+  .meta({
+    id: "DNSEvaluateAction",
+    title: "DNS Evaluate Action",
+    title_zh: "DNS 评估动作",
+  });
+
+const DNSRespondAction = z
+  .object({
+    action: z.literal("respond").meta({
+      description:
+        "Returns the evaluated response from a preceding evaluate action. Since sing-box 1.14.0.",
+      description_zh:
+        "返回前一个 evaluate 动作的评估响应。自 sing-box 1.14.0 起可用。",
+    }),
+  })
+  .meta({
+    id: "DNSRespondAction",
+    title: "DNS Respond Action",
+    title_zh: "DNS 响应动作",
   });
 
 // #endregion
@@ -274,6 +331,12 @@ const BaseDNSRule = z.object({
     description: "Match android package name.",
     description_zh: "匹配 Android 应用包名。",
   }),
+  package_name_regex: listableString.optional().meta({
+    description:
+      "Match android package name using regular expression. Since sing-box 1.14.0.",
+    description_zh:
+      "使用正则表达式匹配 Android 应用包名。自 sing-box 1.14.0 起可用。",
+  }),
   user: listableString.optional().meta({
     description: "Match user name. Only supported on Linux.",
     description_zh: "匹配用户名。仅支持 Linux。",
@@ -335,6 +398,38 @@ const BaseDNSRule = z.object({
       "Only supported on Linux, Windows, and macOS. Match default interface address.",
     description_zh: "仅支持 Linux、Windows 和 macOS。匹配默认接口地址。",
   }),
+  source_mac_address: listableString.optional().meta({
+    description:
+      "Match device MAC address. Requires neighbor resolution. Since sing-box 1.14.0.",
+    description_zh:
+      "匹配设备 MAC 地址。需要邻居解析。自 sing-box 1.14.0 起可用。",
+  }),
+  source_hostname: listableString.optional().meta({
+    description:
+      "Match device hostname from DHCP leases. Since sing-box 1.14.0.",
+    description_zh: "从 DHCP 租约匹配设备主机名。自 sing-box 1.14.0 起可用。",
+  }),
+  match_response: z.boolean().optional().meta({
+    description:
+      "Enable response-based matching against evaluated responses. Since sing-box 1.14.0.",
+    description_zh: "启用基于评估响应的响应匹配。自 sing-box 1.14.0 起可用。",
+  }),
+  response_rcode: z.string().optional().meta({
+    description: "Match DNS response code. Since sing-box 1.14.0.",
+    description_zh: "匹配 DNS 响应码。自 sing-box 1.14.0 起可用。",
+  }),
+  response_answer: listableString.optional().meta({
+    description: "Match DNS answer records. Since sing-box 1.14.0.",
+    description_zh: "匹配 DNS 应答记录。自 sing-box 1.14.0 起可用。",
+  }),
+  response_ns: listableString.optional().meta({
+    description: "Match DNS nameserver records. Since sing-box 1.14.0.",
+    description_zh: "匹配 DNS 名称服务器记录。自 sing-box 1.14.0 起可用。",
+  }),
+  response_extra: listableString.optional().meta({
+    description: "Match DNS extra records. Since sing-box 1.14.0.",
+    description_zh: "匹配 DNS 额外记录。自 sing-box 1.14.0 起可用。",
+  }),
   rule_set: listableString.optional().meta({
     description: "Match [rule-set](/configuration/route/#rule_set).",
     description_zh: "匹配 [规则集](/zh/configuration/route/#rule_set)。",
@@ -368,6 +463,8 @@ const DefaultDNSRule = z.union([
   BaseDNSRule.extend(DNSRouteOptionsAction.shape),
   BaseDNSRule.extend(DNSRejectAction.shape),
   BaseDNSRule.extend(DNSRouteActionPredefined.shape),
+  BaseDNSRule.extend(DNSEvaluateAction.shape),
+  BaseDNSRule.extend(DNSRespondAction.shape),
 ]);
 
 const LogicalDNSRule = z

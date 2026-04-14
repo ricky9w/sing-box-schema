@@ -200,6 +200,18 @@ export const TunInboundOptions = z
       description_zh:
         "排除路由的 Android 应用包名。Android 应用规则仅在 Android 下被支持，并且需要 `auto_route`。",
     }),
+    include_mac_address: listableString.optional().meta({
+      description:
+        "Limit devices in route by MAC address. Only supported on Linux with `auto_route` and `auto_redirect` enabled. Conflicts with `exclude_mac_address`. Since sing-box 1.14.0.",
+      description_zh:
+        "通过 MAC 地址限制被路由的设备。仅在 Linux 且启用了 `auto_route` 和 `auto_redirect` 时支持。与 `exclude_mac_address` 冲突。自 sing-box 1.14.0 起可用。",
+    }),
+    exclude_mac_address: listableString.optional().meta({
+      description:
+        "Exclude devices in route by MAC address. Only supported on Linux with `auto_route` and `auto_redirect` enabled. Conflicts with `include_mac_address`. Since sing-box 1.14.0.",
+      description_zh:
+        "通过 MAC 地址排除路由的设备。仅在 Linux 且启用了 `auto_route` 和 `auto_redirect` 时支持。与 `include_mac_address` 冲突。自 sing-box 1.14.0 起可用。",
+    }),
     stack: z.enum(["system", "gvisor", "mixed"]).optional().meta({
       description:
         "TCP/IP stack. `system` performs L3 to L4 translation using the system network stack, `gvisor` uses gVisor's virtual network stack, and `mixed` pairs the system TCP stack with gVisor's UDP stack. Defaults to `mixed` if the gVisor build tag is enabled, otherwise defaults to `system`.",

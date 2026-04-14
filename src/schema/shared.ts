@@ -226,6 +226,11 @@ export const DomainResolverOptions = z
       description: "Disable cache and save cache in this query.",
       description_zh: "在此查询中禁用缓存。",
     }),
+    disable_optimistic_cache: z.boolean().optional().meta({
+      description:
+        "Disable optimistic DNS caching for this query. Since sing-box 1.14.0.",
+      description_zh: "禁用此查询的乐观 DNS 缓存。自 sing-box 1.14.0 起可用。",
+    }),
     rewrite_ttl: z.number().int().optional().meta({
       description: "Rewrite TTL in DNS responses.",
       description_zh: "重写 DNS 回应中的 TTL。",
@@ -358,9 +363,9 @@ export const DialerOptions = z
     }),
     domain_strategy: DomainStrategy.optional().meta({
       description:
-        "Default domain strategy for resolving the domain names. Deprecated in sing-box 1.12.0 and removed in 1.14.0. Available values: `prefer_ipv4`, `prefer_ipv6`, `ipv4_only`, `ipv6_only`. `direct` falls back to `inbound.domain_strategy` when unset while other types only affect server addresses.",
+        "Default domain strategy for resolving the domain names. Deprecated in sing-box 1.12.0 and removed in 1.14.0.",
       description_zh:
-        "默认解析域名策略。已在 sing-box 1.12.0 弃用，并将在 1.14.0 移除。可用值：`prefer_ipv4`、`prefer_ipv6`、`ipv4_only`、`ipv6_only`。`direct` 未设置时回退到 `inbound.domain_strategy`，其他类型仅影响服务器地址。",
+        "默认解析域名策略。已在 sing-box 1.12.0 废弃并在 1.14.0 中移除。",
       deprecated: true,
     }),
   })
@@ -518,6 +523,23 @@ const InboundACMEOptions = z
     dns01_challenge: DNS01Challenge.optional().meta({
       description: "ACME DNS01 challenge field.",
       description_zh: "ACME DNS01 验证字段。",
+    }),
+    account_key: z.string().optional().meta({
+      description: "PEM-encoded ACME account key. Since sing-box 1.14.0.",
+      description_zh: "PEM 编码的 ACME 帐户密钥。自 sing-box 1.14.0 起可用。",
+    }),
+    key_type: z
+      .enum(["ed25519", "p256", "p384", "rsa2048", "rsa4096"])
+      .optional()
+      .meta({
+        description: "Key type for the certificate. Since sing-box 1.14.0.",
+        description_zh: "证书的密钥类型。自 sing-box 1.14.0 起可用。",
+      }),
+    detour: z.string().optional().meta({
+      description:
+        "Tag of an outbound for ACME HTTP requests. Since sing-box 1.14.0.",
+      description_zh:
+        "用于 ACME HTTP 请求的出站标签。自 sing-box 1.14.0 起可用。",
     }),
   })
   .meta({
@@ -687,10 +709,21 @@ export const InboundTLSOptions = z
       description: "Enable kernel TLS receive support.",
       description_zh: "启用内核 TLS 接收支持。",
     }),
+    certificate_provider: z
+      .union([z.string(), InboundACMEOptions])
+      .optional()
+      .meta({
+        description:
+          "Tag of a certificate provider or inline certificate provider configuration. Since sing-box 1.14.0.",
+        description_zh:
+          "证书提供者的标签或内联证书提供者配置。自 sing-box 1.14.0 起可用。",
+      }),
     acme: InboundACMEOptions.optional().meta({
       description:
-        "ACME (Automatic Certificate Management Environment) options.",
-      description_zh: "ACME（自动证书管理环境）选项。",
+        "ACME options. Deprecated in sing-box 1.14.0 and will be removed in 1.16.0. Use `certificate_provider` instead.",
+      description_zh:
+        "ACME 选项。已在 sing-box 1.14.0 废弃，将在 1.16.0 中移除。请改用 `certificate_provider`。",
+      deprecated: true,
     }),
     ech: InboundECHOptions.optional().meta({
       description: "ECH (Encrypted Client Hello) options.",

@@ -131,6 +131,11 @@ const RuleActionResolve = z
       description: "Disable cache and save cache in this query.",
       description_zh: "在此查询中禁用缓存。",
     }),
+    disable_optimistic_cache: z.boolean().optional().meta({
+      description:
+        "Disable optimistic DNS caching for this query. Since sing-box 1.14.0.",
+      description_zh: "禁用此查询的乐观 DNS 缓存。自 sing-box 1.14.0 起可用。",
+    }),
     rewrite_ttl: z.number().int().optional().nullable().meta({
       description: "Rewrite TTL in DNS responses.",
       description_zh: "重写 DNS 回应中的 TTL。",
@@ -392,6 +397,12 @@ const BaseRouteRule = z.object({
     description: "Match android package name.",
     description_zh: "匹配 Android 应用包名。",
   }),
+  package_name_regex: listableString.optional().meta({
+    description:
+      "Match android package name using regular expression. Since sing-box 1.14.0.",
+    description_zh:
+      "使用正则表达式匹配 Android 应用包名。自 sing-box 1.14.0 起可用。",
+  }),
   user: listableString.optional().meta({
     description: "Match user name.",
     description_zh: "匹配用户名。",
@@ -454,6 +465,17 @@ const BaseRouteRule = z.object({
     description:
       "Only supported on Linux, Windows, and macOS. Match default interface address.",
     description_zh: "仅支持 Linux、Windows 和 macOS。匹配默认接口地址。",
+  }),
+  source_mac_address: listableString.optional().meta({
+    description:
+      "Match device MAC address. Requires neighbor resolution. Since sing-box 1.14.0.",
+    description_zh:
+      "匹配设备 MAC 地址。需要邻居解析。自 sing-box 1.14.0 起可用。",
+  }),
+  source_hostname: listableString.optional().meta({
+    description:
+      "Match device hostname from DHCP leases. Since sing-box 1.14.0.",
+    description_zh: "从 DHCP 租约匹配设备主机名。自 sing-box 1.14.0 起可用。",
   }),
   preferred_by: listableString.optional().meta({
     description:

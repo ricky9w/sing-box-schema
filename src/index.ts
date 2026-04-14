@@ -1,6 +1,7 @@
 // Root Configuration
 
 export * from "./schema/certificate";
+export * from "./schema/certificate-provider";
 export * from "./schema/configuration";
 export * from "./schema/debug";
 // DNS
@@ -19,6 +20,7 @@ export * from "./schema/ntp";
 export * from "./schema/outbound";
 // Protocols
 export * from "./schema/protocols/anytls";
+export * from "./schema/protocols/cloudflared";
 export * from "./schema/protocols/direct";
 export * from "./schema/protocols/http";
 export * from "./schema/protocols/hysteria";

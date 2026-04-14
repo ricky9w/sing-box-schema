@@ -131,9 +131,9 @@ export const LegacyDNSServerOptions = z
     title: "Legacy DNS Server",
     title_zh: "旧式 DNS 服务器",
     description:
-      "Legacy DNS servers is deprecated and will be removed in sing-box 1.14.0, check Migration.",
+      "Legacy DNS servers were deprecated in sing-box 1.12.0 and removed in 1.14.0.",
     description_zh:
-      "旧的 DNS 服务器配置已废弃且将在 sing-box 1.14.0 中被移除，参阅 迁移指南。",
+      "旧的 DNS 服务器配置已在 sing-box 1.12.0 废弃并在 1.14.0 中移除。",
     deprecated: true,
   });
 // #endregion
@@ -488,10 +488,32 @@ export const DNSClientOptions = z.object({
   }),
   independent_cache: z.boolean().optional().meta({
     description:
-      "Make each DNS server's cache independent for special purposes. If enabled, will slightly degrade performance.",
+      "Make each DNS server's cache independent for special purposes. Deprecated in sing-box 1.14.0 and will be removed in 1.16.0. DNS cache now automatically keys by transport name.",
     description_zh:
-      "使每个 DNS 服务器的缓存独立，以满足特殊目的。如果启用，将轻微降低性能。",
+      "使每个 DNS 服务器的缓存独立，以满足特殊目的。已在 sing-box 1.14.0 废弃，将在 1.16.0 中移除。DNS 缓存现在自动按传输名称区分。",
+    deprecated: true,
   }),
+  optimistic: z
+    .union([
+      z.boolean(),
+      z.object({
+        enabled: z.boolean().optional().meta({
+          description: "Enable optimistic DNS caching.",
+          description_zh: "启用乐观 DNS 缓存。",
+        }),
+        timeout: z.string().optional().meta({
+          description: "Maximum stale-serve window. `3d` is used by default.",
+          description_zh: "最大过期服务窗口。默认使用 `3d`。",
+        }),
+      }),
+    ])
+    .optional()
+    .meta({
+      description:
+        "Enable optimistic DNS caching. Accepts a boolean or an object with `enabled` and `timeout`. Since sing-box 1.14.0 the object form is supported.",
+      description_zh:
+        "启用乐观 DNS 缓存。接受布尔值或包含 `enabled` 和 `timeout` 的对象。自 sing-box 1.14.0 起支持对象形式。",
+    }),
   cache_capacity: z.number().int().optional().meta({
     description: "LRU cache capacity. Value less than 1024 will be ignored.",
     description_zh: "LRU 缓存容量。小于 1024 的值将被忽略。",
@@ -523,8 +545,10 @@ export const LegacyDNSFakeIPOptions = z
     id: "LegacyDNSFakeIPOptions",
     title: "Legacy DNS FakeIP",
     title_zh: "旧版 DNS FakeIP",
-    description: "Legacy fake-ip configuration is deprecated",
-    description_zh: "旧的 fake-ip 配置已废弃",
+    description:
+      "Legacy fake-ip configuration is deprecated in sing-box 1.12.0 and removed in 1.14.0. Use the `fakeip` DNS server type instead.",
+    description_zh:
+      "旧的 fake-ip 配置已在 sing-box 1.12.0 废弃并在 1.14.0 中移除。请改用 `fakeip` DNS 服务器类型。",
     deprecated: true,
   });
 

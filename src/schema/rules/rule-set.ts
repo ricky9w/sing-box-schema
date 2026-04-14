@@ -77,6 +77,12 @@ const DefaultHeadlessRule = z.object({
     description: "Match android package name.",
     description_zh: "匹配 Android 应用包名。",
   }),
+  package_name_regex: listableString.optional().meta({
+    description:
+      "Match android package name using regular expression. Since sing-box 1.14.0.",
+    description_zh:
+      "使用正则表达式匹配 Android 应用包名。自 sing-box 1.14.0 起可用。",
+  }),
   network_type: listable(NetworkType).optional().meta({
     description:
       "Match network type. Only supported in graphical clients on Android and Apple platforms. Available values: `wifi`, `cellular`, `ethernet` and `other`.",

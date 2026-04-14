@@ -41,9 +41,16 @@ export const CacheFileOptions = z
      */
     store_rdrc: z.boolean().optional().meta({
       description:
-        "Store rejected DNS response cache in the cache file. The check results of [Address filter DNS rule items](/configuration/dns/rule/#address-filter-fields) will be cached until expiration.",
+        "Store rejected DNS response cache in the cache file. Deprecated in sing-box 1.14.0 and will be removed in 1.16.0. Use `store_dns` instead.",
       description_zh:
-        "将拒绝的 DNS 响应缓存存储在缓存文件中。[地址筛选 DNS 规则项](/zh/configuration/dns/rule/#_3) 的检查结果将被缓存至过期。",
+        "将拒绝的 DNS 响应缓存存储在缓存文件中。已在 sing-box 1.14.0 废弃，将在 1.16.0 中移除。请改用 `store_dns`。",
+      deprecated: true,
+    }),
+    store_dns: z.boolean().optional().meta({
+      description:
+        "Store full DNS cache in the cache file. Since sing-box 1.14.0.",
+      description_zh:
+        "将完整的 DNS 缓存存储在缓存文件中。自 sing-box 1.14.0 起可用。",
     }),
     /**
      * Timeout of rejected DNS response cache.

@@ -117,6 +117,15 @@ export const Hysteria2InboundOptions = z
       description_zh:
         "HTTP3 服务器认证失败时的行为。接受 URL 字符串简写（file:// 或 http(s)://）或完整的伪装对象。与 `masquerade.type` 冲突，若未配置则返回 404 页。",
     }),
+    bbr_profile: z
+      .enum(["conservative", "standard", "aggressive"])
+      .optional()
+      .meta({
+        description:
+          "BBR congestion control profile. Available values: `conservative`, `standard` (default), `aggressive`. Since sing-box 1.14.0.",
+        description_zh:
+          "BBR 拥塞控制配置文件。可选值：`conservative`、`standard`（默认）、`aggressive`。自 sing-box 1.14.0 起可用。",
+      }),
     brutal_debug: z.boolean().optional().meta({
       description: "Enable debug information logging for Hysteria Brutal CC.",
       description_zh: "启用 Hysteria Brutal CC 的调试信息日志记录。",
@@ -149,6 +158,12 @@ export const Hysteria2OutboundOptions = z
         "Port hopping interval. `30s` is used by default. Since sing-box 1.11.0.",
       description_zh: "端口跳跃间隔。默认值 `30s`。自 sing-box 1.11.0 起可用。",
     }),
+    hop_interval_max: z.string().optional().meta({
+      description:
+        "Maximum port hopping interval for randomization. Since sing-box 1.14.0.",
+      description_zh:
+        "端口跳跃最大间隔，用于随机化。自 sing-box 1.14.0 起可用。",
+    }),
     up_mbps: z.number().int().optional().meta({
       description:
         "Max bandwidth, in Mbps. If empty, the BBR congestion control algorithm is used instead of Hysteria CC.",
@@ -177,6 +192,15 @@ export const Hysteria2OutboundOptions = z
       description_zh:
         "TLS 配置，参阅 [TLS](/zh/configuration/shared/tls/#outbound)。",
     }),
+    bbr_profile: z
+      .enum(["conservative", "standard", "aggressive"])
+      .optional()
+      .meta({
+        description:
+          "BBR congestion control profile. Available values: `conservative`, `standard` (default), `aggressive`. Since sing-box 1.14.0.",
+        description_zh:
+          "BBR 拥塞控制配置文件。可选值：`conservative`、`standard`（默认）、`aggressive`。自 sing-box 1.14.0 起可用。",
+      }),
     brutal_debug: z.boolean().optional().meta({
       description: "Enable debug information logging for Hysteria Brutal CC.",
       description_zh: "启用 Hysteria Brutal CC 的调试信息日志记录。",
